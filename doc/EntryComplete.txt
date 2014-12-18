@@ -1,0 +1,98 @@
+*EntryComplete.txt*     Insert mode completion based on lines in designated files or buffers.
+
+		       ENTRY COMPLETE    by Ingo Karkat
+							   *EntryComplete.vim*
+description			|EntryComplete-description|
+usage				|EntryComplete-usage|
+installation			|EntryComplete-installation|
+configuration			|EntryComplete-configuration|
+limitations			|EntryComplete-limitations|
+known problems			|EntryComplete-known-problems|
+todo				|EntryComplete-todo|
+history				|EntryComplete-history|
+
+==============================================================================
+DESCRIPTION					   *EntryComplete-description*
+
+This plugin ...
+
+HOW IT WORKS								     *
+
+SOURCE									     *
+
+Inspired by
+    http://stackoverflow.com/questions/27539429/vim-snippet-phrase-dropdown-menu
+
+SEE ALSO								     *
+(Plugins offering complementary functionality, or plugins using this library.)
+
+RELATED WORKS								     *
+(Alternatives from other authors, other approaches, references not used here.)
+
+==============================================================================
+USAGE							 *EntryComplete-usage*
+In insert mode, invoke the entry completion via CTRL-X CTRL-E
+You can then search forward and backward via CTRL-N / CTRL-P, as usual.
+							     *i_CTRL-X_CTRL-E*
+CTRL-X CTRL-E		Find matches for entries (i.e. entire lines) from the
+			designated sources configured by
+			|g:EntryComplete_Sources|.
+
+==============================================================================
+INSTALLATION					  *EntryComplete-installation*
+
+This script is packaged as a |vimball|. If you have the "gunzip" decompressor
+in your PATH, simply edit the *.vmb.gz package in Vim; otherwise, decompress
+the archive first, e.g. using WinZip. Inside Vim, install by sourcing the
+vimball or via the |:UseVimball| command. >
+    vim EntryComplete*.vmb.gz
+    :so %
+To uninstall, use the |:RmVimball| command.
+
+DEPENDENCIES					  *EntryComplete-dependencies*
+
+- Requires Vim 7.0 or higher.
+- Requires the |CompleteHelper.vim| plugin (vimscript #3914), version 1.50 or
+  higher.
+
+==============================================================================
+CONFIGURATION					 *EntryComplete-configuration*
+
+For a permanent configuration, put the following commands into your |vimrc|:
+ *w:EntryComplete_Sources* *b:EntryComplete_Sources* *g:EntryComplete_Sources*
+This completion uses designated files or buffers as completion sources. You
+can configure window-local, buffer-local, or global Lists of sources. A number
+is taked as a Vim buffer, a string specifies a filespec: >
+    let g:EntryComplete_Sources = [bufnr('lines.txt'), expand('~/.vimrc')]
+<
+							 *EntryComplete-remap*
+If you want to use a different mapping, map your keys to the
+<Plug>(EntryComplete) mapping target _before_ sourcing the script
+(e.g. in your |vimrc|): >
+    imap <C-x><C-e> <Plug>(EntryComplete)
+<
+==============================================================================
+LIMITATIONS					   *EntryComplete-limitations*
+
+KNOWN PROBLEMS					*EntryComplete-known-problems*
+
+TODO							  *EntryComplete-todo*
+
+IDEAS							 *EntryComplete-ideas*
+
+==============================================================================
+HISTORY						       *EntryComplete-history*
+
+GOAL
+First published version.
+
+0.01	18-Dec-2014
+Started development.
+
+==============================================================================
+Copyright: (C) 2014 Ingo Karkat
+The VIM LICENSE applies to this plugin; see |copyright|.
+
+Maintainer:	Ingo Karkat <ingo@karkat.de>
+==============================================================================
+ vim:tw=78:ts=8:ft=help:norl:
