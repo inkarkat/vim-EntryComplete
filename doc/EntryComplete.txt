@@ -62,9 +62,15 @@ For a permanent configuration, put the following commands into your |vimrc|:
  *w:EntryComplete_Sources* *b:EntryComplete_Sources* *g:EntryComplete_Sources*
 This completion uses designated files or buffers as completion sources. You
 can configure window-local, buffer-local, or global Lists of sources. A number
-is taked as a Vim buffer, a string specifies a filespec: >
+is taked as a Vim buffer, a string specifies a filespec, a Funcref is invoked
+without arguments and should return a List of filespecs: >
     let g:EntryComplete_Sources = [bufnr('lines.txt'), expand('~/.vimrc')]
-<
+*b:EntryComplete_FiletypeEntriesPath* *g:EntryComplete_FiletypeEntriesPath*
+The default configuration checks for entries in entries/{filetype}.txt in each
+'runtimepath' directory, most likely ~/.vim/entries/{filetype}.txt. You can
+add additional directories via g:EntryComplete_FiletypeEntriesPath or
+b:EntryComplete_FiletypeEntriesPath.
+
 							 *EntryComplete-remap*
 If you want to use a different mapping, map your keys to the
 <Plug>(EntryComplete) mapping target _before_ sourcing the script
