@@ -66,9 +66,9 @@ is taked as a Vim buffer, a string specifies a filespec, a Funcref is invoked
 without arguments and should return a List of filespecs: >
     let g:EntryComplete_Sources = [bufnr('lines.txt'), expand('~/.vimrc')]
 *b:EntryComplete_FiletypeEntriesPath* *g:EntryComplete_FiletypeEntriesPath*
-The default configuration checks for entries in entries/{filetype}.txt in each
-'runtimepath' directory, most likely ~/.vim/entries/{filetype}.txt. You can
-add additional directories via g:EntryComplete_FiletypeEntriesPath or
+The default configuration checks for entries in entries/{filetype} in each
+'runtimepath' directory, most likely ~/.vim/entries/{filetype}. You can add
+additional directories via g:EntryComplete_FiletypeEntriesPath or
 b:EntryComplete_FiletypeEntriesPath.
 
 							 *EntryComplete-remap*
