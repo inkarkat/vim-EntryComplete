@@ -26,10 +26,9 @@ function! s:GetFiletype( filetype )
 endfunction
 
 function! s:GetEntriesFilespecs( filetype )
-    let l:filename = a:filetype . '.txt'
     return
-    \   ingo#compat#globpath(s:CustomPath(), l:filename, 0, 1) +
-    \   ingo#compat#globpath(&runtimepath, 'entries/' . l:filename, 0, 1)
+    \   ingo#compat#globpath(s:CustomPath(), a:filetype, 0, 1) +
+    \   ingo#compat#globpath(&runtimepath, 'entries/' . a:filetype, 0, 1)
 endfunction
 function! s:CustomPath()
     let l:path = ''
