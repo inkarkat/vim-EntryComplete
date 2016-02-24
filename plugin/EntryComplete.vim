@@ -21,7 +21,8 @@ let g:loaded_EntryComplete = 1
 "- configuration ---------------------------------------------------------------
 
 if ! exists('g:EntryComplete_Sources')
-    let g:EntryComplete_Sources = []
+    if v:version < 702 | runtime autoload/EntryComplete/Filetype.vim | endif  " The Funcref doesn't trigger the autoload in older Vim versions.
+    let g:EntryComplete_Sources = [function('EntryComplete#Filetype#Sources')]
 endif
 
 
