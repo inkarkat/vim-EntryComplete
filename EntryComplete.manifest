@@ -1,0 +1,4 @@
+autoload/EntryComplete.vim
+autoload/EntryComplete/Filetype.vim
+plugin/EntryComplete.vim
+doc/EntryComplete.txt
