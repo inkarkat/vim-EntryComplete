@@ -5,7 +5,7 @@
 "   - ingo/msg.vim autoload script
 "   - ingo/plugin/setting.vim autoload script
 "
-" Copyright: (C) 2014 Ingo Karkat
+" Copyright: (C) 2014-2016 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
@@ -64,6 +64,11 @@ function! s:GetMatches( Source, pattern )
 	    let l:matches += call('s:GetMatches', [l:filespec, a:pattern])
 	endfor
 	return l:matches
+    elseif type(a:Source) == type([])
+	return filter(
+	\   map(copy(a:Source), 's:MakeCompleteEntry(v:val)'),
+	\   'v:val.word =~ a:pattern'
+	\)
     else
 	try
 	    let l:lines = readfile(a:Source)
@@ -78,6 +83,13 @@ function! s:GetMatches( Source, pattern )
     \   filter(l:lines, 'v:val =~ a:pattern'),
     \   'CompleteHelper#Abbreviate#Word({"word": v:val, "menu": l:menu})'
     \)
+endfunction
+function! s:MakeCompleteEntry( item )
+    let l:matchObj = (type(a:item) == type({}) ? a:item : {'word': a:item})
+    if empty(get(l:matchObj, 'abbr', ''))
+	call CompleteHelper#Abbreviate#Word(l:matchObj)
+    endif
+    return l:matchObj
 endfunction
 
 function! EntryComplete#Expr()
