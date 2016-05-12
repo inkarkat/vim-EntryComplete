@@ -11,6 +11,7 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.00.002	19-Dec-2014	ENH: Support Filespecs as a source type.
 "   1.00.001	18-Dec-2014	file creation
 let s:save_cpo = &cpo
 set cpo&vim
@@ -24,8 +25,8 @@ function! EntryComplete#EntryComplete( findstart, base )
 	endif
 	return l:startCol - 1 " Return byte index, not column.
     else
-	let l:sources = ingo#plugin#setting#GetFromScope('EntryComplete_Sources', ['w', 'b', 'g'], [])
-	if empty(l:sources)
+	let l:Sources = ingo#plugin#setting#GetFromScope('EntryComplete_Sources', ['w', 'b', 'g'], [])
+	if empty(l:Sources)
 	    call ingo#msg#ErrorMsg('No sources defined')
 	    return []
 	endif
@@ -33,8 +34,8 @@ function! EntryComplete#EntryComplete( findstart, base )
 	" Find matches starting with a:base.
 	let l:matches = []
 	let l:pattern = '^\%(\k\@!.\)*\V' . escape(a:base, '\')
-	for l:source in l:sources
-	    let l:matches += s:GetMatches(l:source, l:pattern)
+	for l:Source in l:Sources
+	    let l:matches += s:GetMatches(l:Source, l:pattern)
 	endfor
 
 	if empty(l:matches)
@@ -43,22 +44,30 @@ function! EntryComplete#EntryComplete( findstart, base )
 	    echohl None
 
 	    let l:pattern = '\<\V' . escape(a:base, '\')
-	    for l:source in l:sources
-		let l:matches += s:GetMatches(l:source, l:pattern)
+	    for l:Source in l:Sources
+		let l:matches += s:GetMatches(l:Source, l:pattern)
 	    endfor
 	endif
 
 	return l:matches
     endif
 endfunction
-function! s:GetMatches( source, pattern )
-    if type(a:source) == type(0)
-	let l:lines = getbufline(a:source, 1, '$')
-	let l:menu = '' . a:source
+function! s:GetMatches( Source, pattern )
+    if type(a:Source) == type(0)
+	let l:lines = getbufline(a:Source, 1, '$')
+	let l:menu = '' . a:Source
+    elseif type(a:Source) == type(function('tr'))
+	" Resolve the available filespecs for entries, and turn those into
+	" matches by recursively invoking this function.
+	let l:matches = []
+	for l:filespec in call(a:Source, [])
+	    let l:matches += call('s:GetMatches', [l:filespec, a:pattern])
+	endfor
+	return l:matches
     else
 	try
-	    let l:lines = readfile(a:source)
-	    let l:menu = fnamemodify(a:source, ':t')
+	    let l:lines = readfile(a:Source)
+	    let l:menu = fnamemodify(a:Source, ':t')
 	catch /^Vim\%((\a\+)\)\=:/
 	    call ingo#msg#VimExceptionMsg()
 	    let l:lines = []
