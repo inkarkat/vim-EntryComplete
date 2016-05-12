@@ -14,9 +14,22 @@ history				|EntryComplete-history|
 ==============================================================================
 DESCRIPTION					   *EntryComplete-description*
 
-This plugin ...
+Cheat sheets that contain a single phrase, formula, or function invocation per
+line can be very helpful and are used by many people. Using such as a
+completion source is difficult, though. The full line completion
+(|i_CTRL-X_CTRL-L| considers other buffers, but cannot be restricted to a
+single one. And to trigger the completion, the base has to be written on a new
+line; you cannot recall a phrase from within an existing one. All of this can
+be avoided by using a snippet plugin, but the syntax to define them usually is
+more complex (so one cannot directly use one's cheat sheet), and the
+additional features interfere with easy definition. Also, not every snippet
+plugin offers the popup selection aspect of insert-mode completion, so you may
+have to remember the snippet name to recall it.
 
-HOW IT WORKS								     *
+This plugin provides a highly configurable completion of lines found in
+designated files or buffers, triggered by a keyword in front of the cursor.
+With its flexibility, you can use custom cheat sheets for a project, filetype,
+or particular buffer or window as well as global ones.
 
 SOURCE									     *
 
@@ -24,10 +37,9 @@ Inspired by
     http://stackoverflow.com/questions/27539429/vim-snippet-phrase-dropdown-menu
 
 SEE ALSO								     *
-(Plugins offering complementary functionality, or plugins using this library.)
 
-RELATED WORKS								     *
-(Alternatives from other authors, other approaches, references not used here.)
+- Check out the |CompleteHelper.vim| plugin page (vimscript #3914) for a full
+  list of insert mode completions powered by it.
 
 ==============================================================================
 USAGE							 *EntryComplete-usage*
@@ -52,6 +64,8 @@ To uninstall, use the |:RmVimball| command.
 DEPENDENCIES					  *EntryComplete-dependencies*
 
 - Requires Vim 7.0 or higher.
+- Requires the |ingo-library.vim| plugin (vimscript #4433), version 1.019 or
+  higher.
 - Requires the |CompleteHelper.vim| plugin (vimscript #3914), version 1.50 or
   higher.
 
@@ -61,15 +75,16 @@ CONFIGURATION					 *EntryComplete-configuration*
 For a permanent configuration, put the following commands into your |vimrc|:
  *w:EntryComplete_Sources* *b:EntryComplete_Sources* *g:EntryComplete_Sources*
 This completion uses designated files or buffers as completion sources. You
-can configure window-local, buffer-local, or global Lists of sources. A number
-is taked as a Vim buffer, a string specifies a filespec, a Funcref is invoked
+can configure window-local, buffer-local, or global Lists of sources. A Number
+is taked as a Vim buffer, a String specifies a filespec, a Funcref is invoked
 without arguments and should return a List of filespecs: >
     let g:EntryComplete_Sources = [bufnr('lines.txt'), expand('~/.vimrc')]
-*b:EntryComplete_FiletypeEntriesPath* *g:EntryComplete_FiletypeEntriesPath*
+<
+   *b:EntryComplete_FiletypeEntriesPath* *g:EntryComplete_FiletypeEntriesPath*
 The default configuration checks for entries in entries/{filetype} in each
-'runtimepath' directory, most likely ~/.vim/entries/{filetype}. You can add
-additional directories via g:EntryComplete_FiletypeEntriesPath or
-b:EntryComplete_FiletypeEntriesPath.
+'runtimepath' directory, usually in your user's configuration in
+~/.vim/entries/{filetype}. You can add additional directories to be checked
+via g:EntryComplete_FiletypeEntriesPath or b:EntryComplete_FiletypeEntriesPath.
 
 							 *EntryComplete-remap*
 If you want to use a different mapping, map your keys to the
@@ -89,7 +104,7 @@ IDEAS							 *EntryComplete-ideas*
 ==============================================================================
 HISTORY						       *EntryComplete-history*
 
-GOAL
+1.00	23-Dec-2014
 First published version.
 
 0.01	18-Dec-2014
