@@ -76,9 +76,13 @@ For a permanent configuration, put the following commands into your |vimrc|:
  *w:EntryComplete_Sources* *b:EntryComplete_Sources* *g:EntryComplete_Sources*
 This completion uses designated files or buffers as completion sources. You
 can configure window-local, buffer-local, or global Lists of sources. A Number
-is taked as a Vim buffer, a String specifies a filespec, a Funcref is invoked
-without arguments and should return a List of filespecs: >
-    let g:EntryComplete_Sources = [bufnr('lines.txt'), expand('~/.vimrc')]
+is taken as a Vim buffer, a String specifies a filespec, a List directly
+specifies matches (either as simple strings, or match objects as described
+under |complete-items|), a Funcref is invoked without arguments and should
+return a List of filespecs: >
+    let g:EntryComplete_Sources = [bufnr('lines.txt'), expand('~/.vimrc'),
+    \	['foo', 'bar', {'word': 'baz', 'menu': 'my favorite'}]
+    \]
 <
    *b:EntryComplete_FiletypeEntriesPath* *g:EntryComplete_FiletypeEntriesPath*
 The default configuration checks for entries in entries/{filetype} in each
@@ -104,6 +108,9 @@ IDEAS							 *EntryComplete-ideas*
 ==============================================================================
 HISTORY						       *EntryComplete-history*
 
+1.10	RELEASEME
+- ENH: Support Lists of matches / match objects.
+
 1.00	23-Dec-2014
 First published version.
 
@@ -111,7 +118,7 @@ First published version.
 Started development.
 
 ==============================================================================
-Copyright: (C) 2014 Ingo Karkat
+Copyright: (C) 2014-2016 Ingo Karkat
 The VIM LICENSE applies to this plugin; see |copyright|.
 
 Maintainer:	Ingo Karkat <ingo@karkat.de>
