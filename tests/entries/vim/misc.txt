@@ -1,2 +1,0 @@
-let l:foxIdx = stridx(a:text, 'fox')
-jumps | version
