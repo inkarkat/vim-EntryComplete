@@ -1,6 +1,8 @@
 " EntryComplete/Filetype.vim: Supply filetype-specific entries from a base directory.
 "
 " DEPENDENCIES:
+"   - ingo/collections.vim autoload script
+"   - ingo/compat.vim autoload script
 "
 " Copyright: (C) 2014 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
