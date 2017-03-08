@@ -11,6 +11,7 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.10.003	14-May-2016	ENH: Support Lists of matches / match objects.
 "   1.00.002	19-Dec-2014	ENH: Support Filespecs as a source type.
 "   1.00.001	18-Dec-2014	file creation
 let s:save_cpo = &cpo
@@ -36,6 +37,7 @@ function! EntryComplete#EntryComplete( findstart, base )
 	let l:pattern = '^\%(\k\@!.\)*\V' . escape(a:base, '\')
 	for l:Source in l:Sources
 	    let l:matches += s:GetMatches(l:Source, l:pattern)
+	    unlet l:Source
 	endfor
 
 	if empty(l:matches)
@@ -46,6 +48,7 @@ function! EntryComplete#EntryComplete( findstart, base )
 	    let l:pattern = '\<\V' . escape(a:base, '\')
 	    for l:Source in l:Sources
 		let l:matches += s:GetMatches(l:Source, l:pattern)
+		unlet l:Source
 	    endfor
 	endif
 
