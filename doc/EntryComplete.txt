@@ -79,16 +79,17 @@ can configure window-local, buffer-local, or global Lists of sources. A Number
 is taken as a Vim buffer, a String specifies a filespec, a List directly
 specifies matches (either as simple strings, or match objects as described
 under |complete-items|), a Funcref is invoked without arguments and should
-return a List of filespecs: >
+return a List of filespecs / Numbers / Lists: >
     let g:EntryComplete_Sources = [bufnr('lines.txt'), expand('~/.vimrc'),
     \	['foo', 'bar', {'word': 'baz', 'menu': 'my favorite'}]
     \]
 <
    *b:EntryComplete_FiletypeEntriesPath* *g:EntryComplete_FiletypeEntriesPath*
-The default configuration checks for entries in entries/{filetype} in each
-'runtimepath' directory, usually in your user's configuration in
-~/.vim/entries/{filetype}. You can add additional directories to be checked
-via g:EntryComplete_FiletypeEntriesPath or b:EntryComplete_FiletypeEntriesPath.
+The default configuration checks for entries in entries/{filetype}.txt and
+entries/{filetype}/*.txt in each 'runtimepath' directory, usually in your
+user's configuration in ~/.vim/entries/.
+You can add additional directories to be checked via
+g:EntryComplete_FiletypeEntriesPath or b:EntryComplete_FiletypeEntriesPath.
 
 							 *EntryComplete-remap*
 If you want to use a different mapping, map your keys to the
@@ -108,7 +109,13 @@ IDEAS							 *EntryComplete-ideas*
 ==============================================================================
 HISTORY						       *EntryComplete-history*
 
-1.10	RELEASEME
+1.20	RELEASEME
+- CHG: Use *.txt file extension for default entry files. This allows to put
+  backups in the same directory without having them picked up.
+- ENH: By default, also look into .../entries/{filetype}/*.txt for entries.
+  This allows to easily use multiple entry sources for a filetype.
+
+1.10	09-Mar-2017
 - ENH: Support Lists of matches / match objects.
 
 1.00	23-Dec-2014
@@ -118,7 +125,7 @@ First published version.
 Started development.
 
 ==============================================================================
-Copyright: (C) 2014-2016 Ingo Karkat
+Copyright: (C) 2014-2017 Ingo Karkat
 The VIM LICENSE applies to this plugin; see |copyright|.
 
 Maintainer:	Ingo Karkat <ingo@karkat.de>
