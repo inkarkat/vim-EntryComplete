@@ -11,6 +11,8 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.20.004	10-Mar-2017	ENH: Support parsing of files and buffers into
+"				complete match objects via a header line.
 "   1.10.003	14-May-2016	ENH: Support Lists of matches / match objects.
 "   1.00.002	19-Dec-2014	ENH: Support Filespecs as a source type.
 "   1.00.001	18-Dec-2014	file creation
@@ -75,17 +77,25 @@ function! s:GetMatches( Source, pattern )
     else
 	try
 	    let l:lines = readfile(a:Source)
-	    let l:menu = fnamemodify(a:Source, ':t')
+	    let l:menu = fnamemodify(a:Source, ':t:r')
 	catch /^Vim\%((\a\+)\)\=:/
 	    call ingo#msg#VimExceptionMsg()
 	    let l:lines = []
 	endtry
     endif
 
-    return map(
-    \   filter(l:lines, 'v:val =~ a:pattern'),
-    \   'CompleteHelper#Abbreviate#Word({"word": v:val, "menu": l:menu})'
-    \)
+    let [l:parseExpr, l:headerMapping] = s:GetHeaderLine(get(l:lines, 0, ''))
+    if empty(l:headerMapping)
+	return map(
+	\   filter(l:lines, 'v:val =~ a:pattern'),
+	\   'CompleteHelper#Abbreviate#Word({"word": v:val, "menu": l:menu})'
+	\)
+    else
+	return filter(
+	\   map(l:lines[1:], 's:ApplyHeaderMapping(v:val, l:parseExpr, l:headerMapping, l:menu)'),
+	\   'v:val.word =~ a:pattern'
+	\)
+    endif
 endfunction
 function! s:MakeCompleteEntry( item )
     let l:matchObj = (type(a:item) == type({}) ? a:item : {'word': a:item})
@@ -93,6 +103,28 @@ function! s:MakeCompleteEntry( item )
 	call CompleteHelper#Abbreviate#Word(l:matchObj)
     endif
     return l:matchObj
+endfunction
+
+function! s:GetHeaderLine( line )
+    let [l:separators, l:items] = ingo#collections#SeparateItemsAndSeparators(a:line, 'word\|abbr\|menu\|info\|kind\|icase\|dup\|empty')
+    return [
+    \   '\V\^' .
+    \   join([''] + map(l:separators, 'escape(v:val, "\\")') + [''], '\(\.\{-}\)') .
+    \   '\$',
+    \   l:items
+    \]
+endfunction
+function! s:ApplyHeaderMapping( line, parseExpr, headerMapping, defaultMenu )
+    let l:matches = matchlist(a:line, a:parseExpr)
+    if empty(l:matches)
+	return CompleteHelper#Abbreviate#Word({"word": a:line, "menu": a:defaultMenu})
+    endif
+
+    let l:matchObj = {'menu': a:defaultMenu}
+    for l:idx in range(len(a:headerMapping))
+	let l:matchObj[a:headerMapping[l:idx]] = l:matches[l:idx + 1]
+    endfor
+    return s:MakeCompleteEntry(l:matchObj)
 endfunction
 
 function! EntryComplete#Expr()
