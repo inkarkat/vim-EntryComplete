@@ -5,7 +5,7 @@
 "   - ingo/msg.vim autoload script
 "   - ingo/plugin/setting.vim autoload script
 "
-" Copyright: (C) 2014-2016 Ingo Karkat
+" Copyright: (C) 2014-2017 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
@@ -63,8 +63,8 @@ function! s:GetMatches( Source, pattern )
 	" Resolve the available filespecs for entries, and turn those into
 	" matches by recursively invoking this function.
 	let l:matches = []
-	for l:filespec in call(a:Source, [])
-	    let l:matches += call('s:GetMatches', [l:filespec, a:pattern])
+	for l:ResolvedSource in call(a:Source, [])
+	    let l:matches += call('s:GetMatches', [l:ResolvedSource, a:pattern])
 	endfor
 	return l:matches
     elseif type(a:Source) == type([])
