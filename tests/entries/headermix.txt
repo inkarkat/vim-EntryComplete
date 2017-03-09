@@ -1,0 +1,4 @@
+word | abbr#menu
+My bonnie is over the ocean | ocean-bonnie#A well-known shanty.
+I'm singing in the rain | sing-rain#Everyone remembers Fred Astaire.
+My funny valentine | fun-val#Is this a musical?
