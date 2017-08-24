@@ -122,6 +122,8 @@ HISTORY						       *EntryComplete-history*
   This allows to easily use multiple entry sources for a filetype.
 - ENH: Support parsing of files and buffers into complete match objects via a
   header line.
+- Expose EntryComplete#Filetype#GetEntriesFilespecs(); it can be useful for
+  customizations.
 
 1.10	09-Mar-2017
 - ENH: Support Lists of matches / match objects.
