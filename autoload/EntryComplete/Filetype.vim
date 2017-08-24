@@ -4,12 +4,19 @@
 "   - ingo/collections.vim autoload script
 "   - ingo/compat.vim autoload script
 "
-" Copyright: (C) 2014 Ingo Karkat
+" Copyright: (C) 2014-2017 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.20.002	09-Mar-2017	CHG: Use *.txt file extension for default entry
+"				files. This allows to put backups in the same
+"				directory without having them picked up.
+"				ENH: By default, also look into
+"				.../entries/{filetype}/*.txt for entries. This
+"				allows to easily use multiple entry sources for
+"				a filetype.
 "   1.00.001	19-Dec-2014	file creation
 let s:save_cpo = &cpo
 set cpo&vim
@@ -29,8 +36,10 @@ endfunction
 
 function! s:GetEntriesFilespecs( filetype )
     return
-    \   ingo#compat#globpath(s:CustomPath(), a:filetype, 0, 1) +
-    \   ingo#compat#globpath(&runtimepath, 'entries/' . a:filetype, 0, 1)
+    \   ingo#compat#globpath(s:CustomPath(), a:filetype . '.txt', 0, 1) +
+    \   ingo#compat#globpath(s:CustomPath(), a:filetype . '/*.txt', 0, 1) +
+    \   ingo#compat#globpath(&runtimepath, 'entries/' . a:filetype . '.txt', 0, 1) +
+    \   ingo#compat#globpath(&runtimepath, 'entries/' . a:filetype . '/*.txt', 0, 1)
 endfunction
 function! s:CustomPath()
     let l:path = ''
