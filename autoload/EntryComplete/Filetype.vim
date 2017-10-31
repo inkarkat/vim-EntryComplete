@@ -38,10 +38,18 @@ endfunction
 
 function! EntryComplete#Filetype#GetEntriesFilespecs( filetype )
     return
+    \   EntryComplete#Filetype#GetDefaultEntriesFilespecs(a:filetype) +
+    \   EntryComplete#Filetype#GetNamedEntriesFilespecs(a:filetype, '*')
+endfunction
+function! EntryComplete#Filetype#GetDefaultEntriesFilespecs( filetype )
+    return
     \   ingo#compat#globpath(s:CustomPath(), a:filetype . '.txt', 0, 1) +
-    \   ingo#compat#globpath(s:CustomPath(), a:filetype . '/*.txt', 0, 1) +
-    \   ingo#compat#globpath(&runtimepath, 'entries/' . a:filetype . '.txt', 0, 1) +
-    \   ingo#compat#globpath(&runtimepath, 'entries/' . a:filetype . '/*.txt', 0, 1)
+    \   ingo#compat#globpath(&runtimepath, 'entries/' . a:filetype . '.txt', 0, 1)
+endfunction
+function! EntryComplete#Filetype#GetNamedEntriesFilespecs( filetype, entryGlob )
+    return
+    \   ingo#compat#globpath(s:CustomPath(), a:filetype . '/' . a:entryGlob . '.txt', 0, 1) +
+    \   ingo#compat#globpath(&runtimepath, 'entries/' . a:filetype . '/' . a:entryGlob . '.txt', 0, 1)
 endfunction
 function! s:CustomPath()
     let l:path = ''
