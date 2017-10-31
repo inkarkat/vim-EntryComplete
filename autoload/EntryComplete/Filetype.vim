@@ -10,6 +10,8 @@
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 "
 " REVISION	DATE		REMARKS
+"   1.20.003	25-Aug-2017	Expose
+"				EntryComplete#Filetype#GetEntriesFilespecs().
 "   1.20.002	09-Mar-2017	CHG: Use *.txt file extension for default entry
 "				files. This allows to put backups in the same
 "				directory without having them picked up.
@@ -23,7 +25,7 @@ set cpo&vim
 
 function! EntryComplete#Filetype#Sources()
     return ingo#collections#Flatten1(
-    \   map(s:GetFiletypes(), 's:GetEntriesFilespecs(v:val)')
+    \   map(s:GetFiletypes(), 'EntryComplete#Filetype#GetEntriesFilespecs(v:val)')
     \)
 endfunction
 
@@ -34,7 +36,7 @@ function! s:GetFiletype( filetype )
     return (empty(a:filetype) ? 'default' : a:filetype)
 endfunction
 
-function! s:GetEntriesFilespecs( filetype )
+function! EntryComplete#Filetype#GetEntriesFilespecs( filetype )
     return
     \   ingo#compat#globpath(s:CustomPath(), a:filetype . '.txt', 0, 1) +
     \   ingo#compat#globpath(s:CustomPath(), a:filetype . '/*.txt', 0, 1) +
