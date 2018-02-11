@@ -8,7 +8,7 @@ wincmd p
 let g:EntryComplete_Sources = [bufnr('source')]
 set completefunc=EntryComplete#EntryComplete
 
-source ../helpers/completetest.vim
+runtime tests/helpers/completetest.vim
 call vimtest#StartTap()
 call vimtap#Plan(3)
 call IsMatchesInIsolatedLine('d', ['default one', 'designed'], 'begin matches for d')
