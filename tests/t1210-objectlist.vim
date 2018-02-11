@@ -7,9 +7,10 @@ let g:EntryComplete_Sources = [[
 \]]
 set completefunc=EntryComplete#EntryComplete
 
-source ../helpers/completetest.vim
+runtime tests/helpers/completetest.vim
 call vimtest#StartTap()
 call vimtap#Plan(3)
+
 call IsMatchesInIsolatedLine('li', ['listed object', 'likewise'], 'begin matches for li')
 call IsMatchesInIsolatedLine('', ['listed object', 'likewise', 'another from objects'], 'any match for all')
 call IsMatchesInIsolatedLine('obj', ['listed object', 'another from objects'], 'anywhere matches for obj')
