@@ -2,7 +2,7 @@
 
 set completefunc=EntryComplete#EntryComplete
 
-source ../helpers/completetest.vim
+runtime tests/helpers/completetest.vim
 call vimtest#StartTap()
 call vimtap#Plan(9)
 call IsMatchesInIsolatedLine('', ['default text'], 'any match for no filetype')
