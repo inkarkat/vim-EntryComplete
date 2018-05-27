@@ -112,7 +112,7 @@ https://github.com/inkarkat/vim-EntryComplete/issues or email (address below).
 HISTORY
 ------------------------------------------------------------------------------
 
-##### 1.20    RELEASEME
+##### 1.20    27-May-2018
 - CHG: Use \*.txt file extension for default entry files. This allows to put
   backups in the same directory without having them picked up.
 - ENH: By default, also look into .../entries/{filetype}/\*.txt for entries.
