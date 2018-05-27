@@ -5,17 +5,10 @@
 "   - ingo/msg.vim autoload script
 "   - ingo/plugin/setting.vim autoload script
 "
-" Copyright: (C) 2014-2017 Ingo Karkat
+" Copyright: (C) 2014-2018 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
-"
-" REVISION	DATE		REMARKS
-"   1.20.004	10-Mar-2017	ENH: Support parsing of files and buffers into
-"				complete match objects via a header line.
-"   1.10.003	14-May-2016	ENH: Support Lists of matches / match objects.
-"   1.00.002	19-Dec-2014	ENH: Support Filespecs as a source type.
-"   1.00.001	18-Dec-2014	file creation
 let s:save_cpo = &cpo
 set cpo&vim
 

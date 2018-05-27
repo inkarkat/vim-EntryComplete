@@ -4,13 +4,10 @@
 "   - Requires Vim 7.0 or higher.
 "   - EntryComplete.vim autoload script
 "
-" Copyright: (C) 2014 Ingo Karkat
+" Copyright: (C) 2014-2018 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
-"
-" REVISION	DATE		REMARKS
-"   1.00.001	18-Dec-2014	file creation
 
 " Avoid installing twice or when in unsupported Vim version.
 if exists('g:loaded_EntryComplete') || (v:version < 700)

@@ -17,7 +17,7 @@ DESCRIPTION					   *EntryComplete-description*
 Cheat sheets that contain a single phrase, formula, or function invocation per
 line can be very helpful and are used by many people. Using such as a
 completion source is difficult, though. The full line completion
-(|i_CTRL-X_CTRL-L| considers other buffers, but cannot be restricted to a
+(|i_CTRL-X_CTRL-L|) considers other buffers, but cannot be restricted to a
 single one. And to trigger the completion, the base has to be written on a new
 line; you cannot recall a phrase from within an existing one. All of this can
 be avoided by using a snippet plugin, but the syntax to define them usually is
@@ -53,10 +53,16 @@ CTRL-X CTRL-E		Find matches for entries (i.e. entire lines) from the
 ==============================================================================
 INSTALLATION					  *EntryComplete-installation*
 
-This script is packaged as a |vimball|. If you have the "gunzip" decompressor
-in your PATH, simply edit the *.vmb.gz package in Vim; otherwise, decompress
-the archive first, e.g. using WinZip. Inside Vim, install by sourcing the
-vimball or via the |:UseVimball| command. >
+The code is hosted in a Git repo at
+    https://github.com/inkarkat/vim-EntryComplete
+You can use your favorite plugin manager, or "git clone" into a directory used
+for Vim |packages|. Releases are on the "stable" branch, the latest unstable
+development snapshot on "master".
+
+This script is also packaged as a |vimball|. If you have the "gunzip"
+decompressor in your PATH, simply edit the *.vmb.gz package in Vim; otherwise,
+decompress the archive first, e.g. using WinZip. Inside Vim, install by
+sourcing the vimball or via the |:UseVimball| command. >
     vim EntryComplete*.vmb.gz
     :so %
 To uninstall, use the |:RmVimball| command.
@@ -112,10 +118,15 @@ TODO							  *EntryComplete-todo*
 
 IDEAS							 *EntryComplete-ideas*
 
+CONTRIBUTING					    *EntryComplete-contribute*
+
+Report any bugs, send patches, or suggest features via the issue tracker at
+https://github.com/inkarkat/vim-EntryComplete/issues or email (address below).
+
 ==============================================================================
 HISTORY						       *EntryComplete-history*
 
-1.20	RELEASEME
+1.20	27-May-2018
 - CHG: Use *.txt file extension for default entry files. This allows to put
   backups in the same directory without having them picked up.
 - ENH: By default, also look into .../entries/{filetype}/*.txt for entries.
@@ -135,7 +146,7 @@ First published version.
 Started development.
 
 ==============================================================================
-Copyright: (C) 2014-2017 Ingo Karkat
+Copyright: (C) 2014-2018 Ingo Karkat
 The VIM LICENSE applies to this plugin; see |copyright|.
 
 Maintainer:	Ingo Karkat <ingo@karkat.de>
