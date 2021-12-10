@@ -93,8 +93,8 @@ example:
     myxomatosis|mixi|A usually fatal viral disease of rabbits.
 ```
 
-The default configuration checks for entries in entries/{filetype}.txt and
-entries/{filetype}/\*.txt in each 'runtimepath' directory, usually in your
+The default global configuration checks for entries in entries/{filetype}.txt
+and entries/{filetype}/\*.txt in each 'runtimepath' directory, usually in your
 user's configuration in ~/.vim/entries/.
 You can add additional directories to be checked via
 g:EntryComplete\_FiletypeEntriesPath or b:EntryComplete\_FiletypeEntriesPath.
