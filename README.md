@@ -1,4 +1,4 @@
-ENTRY COMPLETE   
+ENTRY COMPLETE
 ===============================================================================
 _by Ingo Karkat_
 
@@ -88,8 +88,10 @@ Files and buffers can consist of a header line. This must be the first line,
 and only contain the words from complete-items. The separators in between
 are then used to parse the remaining lines into completion objects. For
 example:
+```
     word|abbr|menu
     myxomatosis|mixi|A usually fatal viral disease of rabbits.
+```
 
 The default configuration checks for entries in entries/{filetype}.txt and
 entries/{filetype}/\*.txt in each 'runtimepath' directory, usually in your
@@ -98,7 +100,7 @@ You can add additional directories to be checked via
 g:EntryComplete\_FiletypeEntriesPath or b:EntryComplete\_FiletypeEntriesPath.
 
 If you want to use a different mapping, map your keys to the
-<Plug>(EntryComplete) mapping target _before_ sourcing the script
+&lt;Plug&gt;(EntryComplete) mapping target _before_ sourcing the script
 (e.g. in your vimrc):
 
     imap <C-x><C-e> <Plug>(EntryComplete)
@@ -111,6 +113,10 @@ https://github.com/inkarkat/vim-EntryComplete/issues or email (address below).
 
 HISTORY
 ------------------------------------------------------------------------------
+
+##### 1.21    RELEASEME
+- Adapt: Minor: Support new completion attributes "equal" and "user\_data" in
+  entry header.
 
 ##### 1.20    27-May-2018
 - CHG: Use \*.txt file extension for default entry files. This allows to put
@@ -132,7 +138,7 @@ HISTORY
 - Started development.
 
 ------------------------------------------------------------------------------
-Copyright: (C) 2014-2018 Ingo Karkat -
+Copyright: (C) 2014-2021 Ingo Karkat -
 The [VIM LICENSE](http://vimdoc.sourceforge.net/htmldoc/uganda.html#license) applies to this plugin.
 
-Maintainer:     Ingo Karkat <ingo@karkat.de>
+Maintainer:     Ingo Karkat &lt;ingo@karkat.de&gt;

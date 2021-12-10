@@ -1,11 +1,10 @@
 " EntryComplete.vim: Insert mode completion based on lines in designated files or buffers.
 "
 " DEPENDENCIES:
-"   - CompleteHelper/Abbreviate.vim autoload script
-"   - ingo/msg.vim autoload script
-"   - ingo/plugin/setting.vim autoload script
+"   - CompleteHelper.vim plugin
+"   - ingo-library.vim plugin
 "
-" Copyright: (C) 2014-2018 Ingo Karkat
+" Copyright: (C) 2014-2021 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
@@ -99,7 +98,7 @@ function! s:MakeCompleteEntry( item )
 endfunction
 
 function! s:GetHeaderLine( line )
-    let [l:separators, l:items] = ingo#collections#SeparateItemsAndSeparators(a:line, 'word\|abbr\|menu\|info\|kind\|icase\|dup\|empty')
+    let [l:separators, l:items] = ingo#collections#SeparateItemsAndSeparators(a:line, 'word\|abbr\|menu\|info\|kind\|icase\|equal\|dup\|empty\|user_data')
     return [
     \   '\V\^' .
     \   join([''] + map(l:separators, 'escape(v:val, "\\")') + [''], '\(\.\{-}\)') .

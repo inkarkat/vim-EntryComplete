@@ -126,6 +126,10 @@ https://github.com/inkarkat/vim-EntryComplete/issues or email (address below).
 ==============================================================================
 HISTORY						       *EntryComplete-history*
 
+1.21	RELEASEME
+- Adapt: Minor: Support new completion attributes "equal" and "user_data" in
+  entry header.
+
 1.20	27-May-2018
 - CHG: Use *.txt file extension for default entry files. This allows to put
   backups in the same directory without having them picked up.
@@ -146,7 +150,7 @@ First published version.
 Started development.
 
 ==============================================================================
-Copyright: (C) 2014-2018 Ingo Karkat
+Copyright: (C) 2014-2021 Ingo Karkat
 The VIM LICENSE applies to this plugin; see |copyright|.
 
 Maintainer:	Ingo Karkat <ingo@karkat.de>
